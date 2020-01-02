@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
+    @IBOutlet weak var score: UILabel!
     
     var quizBrain = QuizBrain()
     
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
                 
                 if isAnswerCorrect {
                     sender.backgroundColor = UIColor.green
+                    quizBrain.setScore(true)
                 }else {
                     sender.backgroundColor = UIColor.red
                 }
@@ -49,14 +51,13 @@ class ViewController: UIViewController {
     func updateUI(){
         questionLabel.text = quizBrain.getQuestionText()
         progressBar.progress = quizBrain.getProgress()
-        
+        score.text = "Score: \(quizBrain.getScore())"
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
     }
     
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 0.2, target: self,   selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
-    
         isTimerRunning = true
      }
     
